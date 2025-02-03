@@ -1,0 +1,27 @@
+To solve this issue, we need to be more explicit in our CSS and prevent the unintended inheritance:
+
+```css
+div {
+  color: blue;
+}
+
+.container div {
+  color: red;
+}
+
+.container p {
+  color: green;
+}
+
+.container p.special {
+  color: purple;
+}
+
+/* Solution: Explicitly override the color for div within .container to prevent inheritance */
+.container div {
+  color: red !important;
+}
+
+```
+
+By using `!important`, we ensure that the `color: red;` rule for `.container div` takes precedence over any inherited styles, effectively preventing the unexpected color change in the sibling `<div>` element.  Alternatively, more specific selectors targeting potential inheriting elements can also resolve this.  However, using !important should be used sparingly as it can have negative consequences on maintainability.  In this context, to resolve this specific case of inheritance, `!important` is an acceptable solution. 
