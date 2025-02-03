@@ -1,0 +1,22 @@
+The following CSS code snippet demonstrates an uncommon error related to specificity and inheritance: 
+
+```css
+div {
+  color: blue;
+}
+
+.container div {
+  color: red;
+}
+
+.container p {
+  color: green;
+}
+
+.container p.special {
+  color: purple;
+}
+
+```
+
+The issue arises from how CSS specificity works in conjunction with inheritance. Initially, `<div>` elements inherit the `color: blue;` property from the universal selector (`div`). Then, the more specific selector `.container div` overrides this with `color: red;`. This is expected behavior. The unexpected behavior appears with the `<p>` elements inside `.container`. While `.container p` sets `color: green;`,  the `.container p.special` selector with higher specificity sets `color: purple;` - as expected.  However, due to inheritance, the `<div>` element that may be a sibling or ancestor of the `.special` element may unintentionally get a `color: purple` as well if it's not explicitly restyled within `.container`. This occurs due to implicit inheritance if the purple style is not explicitly overridden within the container. This scenario is not obvious and is easily overlooked, causing unexpected styling issues.
